@@ -2,14 +2,12 @@ package com.nice.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
 
 @Entity
+@Table(name = "trainings")
 @Data public class User {
 
     @Id
