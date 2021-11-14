@@ -3,21 +3,23 @@ package com.nice.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import javax.persistence.ElementCollection;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
 public class ExerciseDto {
-    @JsonProperty("id")
+
     private UUID id;
-
-    @JsonProperty("title")
+    @NotEmpty
     private String title;
-
-    @JsonProperty("description")
     private String description;
-
-    @JsonProperty("bodypart")
-    private ArrayList<String> bodypart;
+    @ElementCollection
+    @NotEmpty
+    private List<@NotEmpty String> bodyParts;
 
 }

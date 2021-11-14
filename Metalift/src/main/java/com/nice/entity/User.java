@@ -1,23 +1,70 @@
 package com.nice.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Role;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Indexed;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 
 @Entity
-@Table(name = "trainings")
-@Data public class User {
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Table(name = "users")
 
+public class User implements UserDetails, Serializable {
+
+
+    @GeneratedValue
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private String firstName;
-    private String lastName;
-    private String email;
+
+    @CreatedDate
+    private LocalDateTime createdAt;
+    @LastModifiedDate
+    private LocalDateTime modifiedAt;
+
+    private boolean enabled = true;
+
+    @Column(unique = true)
+    private String username;
     private String password;
-    private String phoneNumber;
-    private String addressLine;
+    private String fullName;
+    private Set<Role> authorities = new HashSet<>();
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return enabled;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return enabled;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return enabled;
+    }
+
 
 }

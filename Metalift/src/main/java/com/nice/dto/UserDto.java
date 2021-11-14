@@ -1,34 +1,29 @@
 package com.nice.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.nice.entity.Role;
 import lombok.Data;
 
-import java.util.ArrayList;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
 public class UserDto {
-    @JsonProperty("id")
+
     private UUID id;
 
-    @JsonProperty("title")
-    private String firstName;
-
-    @JsonProperty("description")
-    private String lastName;
-
-    @JsonProperty("bodypart")
-    private String email;
-
-    @JsonProperty("bodypart")
+    @NotBlank
+    @Email
+    private String username;
+    @NotBlank
+    private String fullName;
+    @NotBlank
     private String password;
+    @NotBlank
+    private String rePassword;
+    private Set<Role> authorities;
 
-    @JsonProperty("bodypart")
-    private String phoneNumber;
-
-    @JsonProperty("bodypart")
-    private  String addressLine;
 
 }
-
-
